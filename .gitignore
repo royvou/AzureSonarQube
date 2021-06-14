@@ -1,0 +1,6 @@
+.env
+.env.local
+.env.dev
+.env.tst
+.env.acc
+.env.prd
