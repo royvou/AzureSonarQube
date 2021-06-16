@@ -28,4 +28,4 @@ $SECRETS_JSON = ($SECRETS | ConvertTo-Json -Compress).Replace('"', '""')  # Esca
 az account set --subscription $SUBSCRIPTION_ID
 
 az group create --location $RESOURCEGROUP_LOCATION --resource-group $PREFIX
-az deployment group create -f ./bicep/keyvault.bicep -g $PREFIX --parameters secrets=""""$SECRETS_JSON"""" whitelistedIps=$WHITELIST_IP
+az deployment group create -f ./bicep/WebApp/keyvault.bicep -g $PREFIX --parameters secrets=""""$SECRETS_JSON"""" whitelistedIps=$WHITELIST_IP
