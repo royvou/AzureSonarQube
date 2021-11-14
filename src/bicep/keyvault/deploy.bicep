@@ -8,23 +8,21 @@ var tenantId = subscription().tenantId
 param secrets object
 param whitelistedIps array = []
 
-
 resource keyVault 'Microsoft.KeyVault/vaults@2019-09-01' = {
   name: keyVaultName
   location: location
   properties: {
     enabledForDeployment: false
     enabledForTemplateDeployment: true
-    enabledForDiskEncryption:false
+    enabledForDiskEncryption: false
     tenantId: tenantId
     sku: {
       name: 'standard'
       family: 'A'
     }
-    accessPolicies: [     
-    ]
+    accessPolicies: []
     enableSoftDelete: true
-    enablePurgeProtection: true
+    // enablePurgeProtection: true
     /*
     https://docs.microsoft.com/en-us/azure/app-service/app-service-key-vault-references#access-network-restricted-vaults
     networkAcls: {
@@ -48,6 +46,5 @@ resource keyvaultSecrets 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = [for s
     keyVault
   ]
 }]
-
 
 output keyVaultUri string = keyVault.properties.vaultUri

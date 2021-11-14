@@ -8,7 +8,7 @@ if (-not (Test-Path 'Env:SUBSCRIPTION_ID')) {
 $SUBSCRIPTION_ID = $Env:SUBSCRIPTION_ID
 $PREFIX = "$Env:PREFIX_CUSTOMER-$Env:PREFIX_ENVIRONMENT-$Env:PREFIX_APP"
 $RESOURCEGROUP_LOCATION = $Env:RESOURCEGROUP_LOCATION
-$WHITELIST_IP=$ENV:WHITELIST_IP
+$WHITELIST_IP = $ENV:WHITELIST_IP
 
 # Wrap Array in Object so we can use SecureObject
 $SECRETS = @{
@@ -28,4 +28,4 @@ $SECRETS_JSON = ($SECRETS | ConvertTo-Json -Compress).Replace('"', '""')  # Esca
 az account set --subscription $SUBSCRIPTION_ID
 
 az group create --location $RESOURCEGROUP_LOCATION --resource-group $PREFIX
-az deployment group create -f ./bicep/keyvault.bicep -g $PREFIX --parameters secrets=""""$SECRETS_JSON"""" whitelistedIps=$WHITELIST_IP
+az deployment group create -f .\bicep\keyvault\deploy.bicep -g $PREFIX --parameters secrets=""""$SECRETS_JSON"""" whitelistedIps=$WHITELIST_IP

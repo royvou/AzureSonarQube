@@ -28,14 +28,14 @@ param sqlServerDatabaseSize int = 10737418240 //10 GB
 param sqlServerCollation string = 'SQL_Latin1_General_CP1_CS_AS'
 
 @allowed([
-'Standard_LRS' 
-'Standard_GRS'
-'Standard_RAGRS'
-'Standard_ZRS'
-'Premium_LRS'
-'Premium_ZRS'
-'Standard_GZRS'
-'Standard_RAGZRS'
+  'Standard_LRS'
+  'Standard_GRS'
+  'Standard_RAGRS'
+  'Standard_ZRS'
+  'Premium_LRS'
+  'Premium_ZRS'
+  'Standard_GZRS'
+  'Standard_RAGZRS'
 ])
 param storageSkuName string = 'Standard_LRS'
 
@@ -98,7 +98,7 @@ resource keyVaultSecretUri 'Microsoft.KeyVault/vaults/secrets@2021-04-01-preview
 }
 //encrypt=true;trustServerCertificate=false;hostNameInCertificate=*${environment().suffixes.sqlServerHostname}loginTimeout=30
 
-module sqlserver './modules/sqlServer.bicep' = {
+module sqlserver '../modules/sqlServer.bicep' = {
   name: sqlserverName
   params: {
     administratorLogin: keyVault.getSecret('SQLUSERNAME')
@@ -138,14 +138,14 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2021-01-01' = {
     capacity: hostingPlanSkuCapacity
   }
   properties: {
-    reserved: true 
+    reserved: true
   }
   kind: 'linux'
 }
 
 resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: storageNameTidy
-  kind: startsWith(storageSkuName, 'Premium') ? 'FileStorage' :  'StorageV2'
+  kind: startsWith(storageSkuName, 'Premium') ? 'FileStorage' : 'StorageV2'
   location: location
   sku: {
     name: storageSkuName
@@ -164,7 +164,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2021-04-01' = {
          value: ip
       }]
     } 
-    */ 
+    */
   }
 }
 

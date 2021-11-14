@@ -4,3 +4,6 @@
 .env.tst
 .env.acc
 .env.prd
+
+# Build Bicep templates
+src/bicep/**/*.json
